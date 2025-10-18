@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongo:
+    image: mongo:6.0
+    container_name: tindibandi-mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: securepassword
+      MONGO_INITDB_DATABASE: tindibandi
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
+
+  # Node.js Application
+  app:
+    build: .
+    container_name: tindibandi-app
+    depends_on:
+      - mongo
+    environment:
+      NODE_ENV: development
+      PORT: 3001
+      MONGODB_URI: mongodb://admin:securepassword@mongo:27017/tindibandi?authSource=admin
+      JWT_SECRET: your-jwt-secret-key
+      ADMIN_PASSWORD: admin123
+      SESSION_SECRET: your-session-secret
+    ports:
+      - "3001:3001"
+
+volumes:
+  mongo_data:

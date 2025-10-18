@@ -1,0 +1,13 @@
+region           = "ap-east-1"
+azs              = ["ap-east-1a", "ap-east-1b"]
+vpc_cidr         = "10.0.0.0/16"
+name_prefix      = "TindiBandi-dev"
+enable_dns       = true
+enable_public_ip = true
+cluster_name = "TindiBandi-app-cluster"
+node_desired_size = 3
+node_min_size = 3
+node_max_size = 5
+instance_type = "t3.medium"
+key_name = "Srujan-Ansible-Key"
+ami_id = "ami-0014538074db6748e"
